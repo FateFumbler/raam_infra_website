@@ -26,6 +26,7 @@ function App() {
     // Modal states
     const [showDigitalTwin, setShowDigitalTwin] = useState(false);
     const [showPortfolio, setShowPortfolio] = useState(false);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     const navItems = [
         { label: "Home", href: "#" },
@@ -106,6 +107,7 @@ function App() {
 
             {/* Header / Nav */}
             <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between p-6 md:px-12 backdrop-blur-xl bg-black/20 border-b border-white/5">
+                {/* Logo */}
                 <motion.div
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -119,25 +121,70 @@ function App() {
                     </span>
                 </motion.div>
 
-                <div className="hidden md:block">
+                {/* Desktop Nav - Centered */}
+                <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2">
                     <div className="px-6 py-2">
                         <GooeyNav items={navItems} initialActiveIndex={0} />
                     </div>
                 </div>
 
-                <motion.div
-                    className="hidden md:block"
+                {/* Mobile Menu Button */}
+                <motion.button
+                    className="md:hidden p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
+                    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 >
-                    <Button
-                        variant="outline"
-                        className="rounded-full border-cyan-500/50 text-cyan-400 hover:bg-cyan-500/10 hover:border-cyan-400"
-                    >
-                        Portal Access
-                    </Button>
-                </motion.div>
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        {mobileMenuOpen ? (
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        ) : (
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                        )}
+                    </svg>
+                </motion.button>
+
+                {/* Spacer for desktop to balance layout */}
+                <div className="hidden md:block w-[120px]" />
             </header>
+
+            {/* Mobile Menu Overlay */}
+            <AnimatePresence>
+                {mobileMenuOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, x: '100%' }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: '100%' }}
+                        transition={{ type: 'tween', duration: 0.3 }}
+                        className="fixed inset-0 z-[60] bg-black/95 backdrop-blur-xl md:hidden"
+                    >
+                        <div className="flex flex-col items-center justify-center h-full gap-8">
+                            {navItems.map((item, index) => (
+                                <motion.a
+                                    key={index}
+                                    href={item.href}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: index * 0.1 }}
+                                    className="text-2xl font-light text-white hover:text-cyan-400 transition-colors"
+                                    onClick={() => setMobileMenuOpen(false)}
+                                >
+                                    {item.label}
+                                </motion.a>
+                            ))}
+                        </div>
+                        {/* Close button */}
+                        <button
+                            className="absolute top-6 right-6 p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
+                            onClick={() => setMobileMenuOpen(false)}
+                        >
+                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
             <main className="relative z-10">
                 {/* Hero Section */}
@@ -702,8 +749,8 @@ function App() {
                                             <div className="text-right">
                                                 <div className="text-purple-400 font-bold">{project.value}</div>
                                                 <div className={`text-xs px-2 py-1 rounded-full ${project.status === 'Operational' ? 'bg-green-500/20 text-green-400' :
-                                                        project.status === 'Construction' ? 'bg-amber-500/20 text-amber-400' :
-                                                            'bg-blue-500/20 text-blue-400'
+                                                    project.status === 'Construction' ? 'bg-amber-500/20 text-amber-400' :
+                                                        'bg-blue-500/20 text-blue-400'
                                                     }`}>{project.status}</div>
                                             </div>
                                         </motion.div>
