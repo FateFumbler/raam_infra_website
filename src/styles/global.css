@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+@theme {
+    --color-background: hsl(var(--background));
+    --color-foreground: hsl(var(--foreground));
+    --color-card: hsl(var(--card));
+    --color-card-foreground: hsl(var(--card-foreground));
+    --color-popover: hsl(var(--popover));
+    --color-popover-foreground: hsl(var(--popover-foreground));
+    --color-primary: hsl(var(--primary));
+    --color-primary-foreground: hsl(var(--primary-foreground));
+    --color-secondary: hsl(var(--secondary));
+    --color-secondary-foreground: hsl(var(--secondary-foreground));
+    --color-muted: hsl(var(--muted));
+    --color-muted-foreground: hsl(var(--muted-foreground));
+    --color-accent: hsl(var(--accent));
+    --color-accent-foreground: hsl(var(--accent-foreground));
+    --color-destructive: hsl(var(--destructive));
+    --color-destructive-foreground: hsl(var(--destructive-foreground));
+    --color-border: hsl(var(--border));
+    --color-input: hsl(var(--input));
+    --color-ring: hsl(var(--ring));
+    --radius-lg: var(--radius);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-sm: calc(var(--radius) - 4px);
+}
+
+@layer base {
+    :root {
+        /* Professional Deep Navy & Slate Theme */
+        --background: 222 47% 11%;
+        /* #0f172a - Slate 900 */
+        --foreground: 210 40% 98%;
+        /* #f8fafc - Slate 50 */
+
+        --card: 222 47% 11%;
+        --card-foreground: 210 40% 98%;
+
+        --popover: 222 47% 11%;
+        --popover-foreground: 210 40% 98%;
+
+        --primary: 210 40% 98%;
+        --primary-foreground: 222 47% 11.2%;
+
+        --secondary: 217 33% 17%;
+        /* Slate 800 */
+        --secondary-foreground: 210 40% 98%;
+
+        --muted: 217 33% 17%;
+        --muted-foreground: 215 20.2% 65.1%;
+
+        --accent: 217 33% 17%;
+        --accent-foreground: 210 40% 98%;
+
+        --destructive: 0 62.8% 30.6%;
+        --destructive-foreground: 210 40% 98%;
+
+        --border: 217 33% 17%;
+        --input: 217 33% 17%;
+        --ring: 212.7 26.8% 83.9%;
+        /* Muted ring */
+
+        --radius: 0.5rem;
+
+        /* Sophisticated Golds/Silvers for Accents (Custom Vars) */
+        --gold-accent: #d4af37;
+        --silver-accent: #c0c0c0;
+
+        /* Gooey Nav Particle Colors - All White */
+        --color-1: #ffffff;
+        --color-2: #ffffff;
+        --color-3: #ffffff;
+        --color-4: #ffffff;
+    }
+}
+
+@layer base {
+    * {
+        border-color: var(--border);
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        background-color: hsl(var(--background));
+        color: hsl(var(--foreground));
+    }
+}
