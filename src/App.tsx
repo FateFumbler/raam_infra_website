@@ -2,8 +2,8 @@ import ColorBends from './components/ui/color-bends'
 import GooeyNav from './components/ui/gooey-nav'
 import { Button } from './components/ui/button'
 import { Card, CardContent } from './components/ui/card'
-import { motion, useScroll, useTransform } from 'framer-motion'
-import { useRef } from 'react'
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
+import { useRef, useState } from 'react'
 import { GradientText } from './components/ui/gradient-text'
 import { TiltCard } from './components/ui/tilt-card'
 import { MorphingText } from './components/ui/morphing-text'
@@ -22,6 +22,10 @@ function App() {
 
     const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
     const heroScale = useTransform(scrollYProgress, [0, 0.2], [1, 0.95]);
+
+    // Modal states
+    const [showDigitalTwin, setShowDigitalTwin] = useState(false);
+    const [showPortfolio, setShowPortfolio] = useState(false);
 
     const navItems = [
         { label: "Home", href: "#" },
@@ -209,9 +213,7 @@ function App() {
                             <Button
                                 size="lg"
                                 className="rounded-none border border-white/20 bg-white/5 backdrop-blur-md text-white hover:bg-white/10 px-8 py-6 text-sm font-medium tracking-widest uppercase transition-all"
-                                onClick={() => {
-                                    document.getElementById('impact')?.scrollIntoView({ behavior: 'smooth' });
-                                }}
+                                onClick={() => setShowDigitalTwin(true)}
                             >
                                 <span className="mr-2 opacity-70">◈</span>
                                 Digital Twin Explorer
@@ -220,9 +222,7 @@ function App() {
                                 size="lg"
                                 variant="ghost"
                                 className="rounded-none border-b border-white/30 px-8 py-6 text-sm font-medium tracking-widest uppercase hover:text-white/80"
-                                onClick={() => {
-                                    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-                                }}
+                                onClick={() => setShowPortfolio(true)}
                             >
                                 View Global Portfolio
                             </Button>
@@ -525,6 +525,210 @@ function App() {
                     </div>
                 </div>
             </footer>
+
+            {/* Digital Twin Explorer Modal */}
+            <AnimatePresence>
+                {showDigitalTwin && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl"
+                        onClick={() => setShowDigitalTwin(false)}
+                    >
+                        <motion.div
+                            initial={{ scale: 0.8, opacity: 0, y: 50 }}
+                            animate={{ scale: 1, opacity: 1, y: 0 }}
+                            exit={{ scale: 0.8, opacity: 0, y: 50 }}
+                            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                            className="relative max-w-4xl w-full max-h-[90vh] overflow-y-auto rounded-2xl bg-gradient-to-br from-slate-900 via-slate-900 to-cyan-950 border border-cyan-500/30 shadow-2xl shadow-cyan-500/20"
+                            onClick={e => e.stopPropagation()}
+                        >
+                            {/* Close Button */}
+                            <button
+                                onClick={() => setShowDigitalTwin(false)}
+                                className="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors z-10"
+                            >
+                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+
+                            {/* Header */}
+                            <div className="p-8 pb-0">
+                                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/20 border border-cyan-500/30 text-cyan-400 text-xs font-bold tracking-widest uppercase mb-4">
+                                    <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+                                    Interactive Experience
+                                </div>
+                                <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                                    <GradientText colors={["#00f3ff", "#22c55e", "#a855f7", "#00f3ff"]}>
+                                        Digital Twin Explorer
+                                    </GradientText>
+                                </h2>
+                                <p className="text-white/60 text-lg">
+                                    Experience our infrastructure projects through immersive 3D digital replicas.
+                                </p>
+                            </div>
+
+                            {/* Content Grid */}
+                            <div className="p-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                                {/* Feature Cards */}
+                                {[
+                                    { icon: "🌐", title: "Real-Time Monitoring", desc: "Live data feeds from IoT sensors across all infrastructure" },
+                                    { icon: "🔮", title: "Predictive Analytics", desc: "AI-powered forecasting for maintenance and operations" },
+                                    { icon: "🏗️", title: "3D Visualization", desc: "Navigate through photorealistic digital replicas" },
+                                    { icon: "📊", title: "Performance Metrics", desc: "Track KPIs and sustainability metrics in real-time" }
+                                ].map((feature, i) => (
+                                    <motion.div
+                                        key={i}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ delay: 0.2 + i * 0.1 }}
+                                        className="p-6 rounded-xl bg-white/5 border border-white/10 hover:border-cyan-500/30 transition-all group"
+                                    >
+                                        <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">{feature.icon}</div>
+                                        <h3 className="text-lg font-bold text-white mb-2">{feature.title}</h3>
+                                        <p className="text-white/50 text-sm">{feature.desc}</p>
+                                    </motion.div>
+                                ))}
+                            </div>
+
+                            {/* CTA */}
+                            <div className="p-8 pt-0">
+                                <div className="p-6 rounded-xl bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border border-cyan-500/30">
+                                    <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                                        <div>
+                                            <h4 className="text-xl font-bold text-white mb-1">Request Demo Access</h4>
+                                            <p className="text-white/50">Experience our Digital Twin platform firsthand</p>
+                                        </div>
+                                        <Button className="bg-cyan-500 hover:bg-cyan-400 text-black font-bold px-6 py-3">
+                                            Schedule Demo
+                                        </Button>
+                                    </div>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* Global Portfolio Modal */}
+            <AnimatePresence>
+                {showPortfolio && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl"
+                        onClick={() => setShowPortfolio(false)}
+                    >
+                        <motion.div
+                            initial={{ scale: 0.8, opacity: 0, y: 50 }}
+                            animate={{ scale: 1, opacity: 1, y: 0 }}
+                            exit={{ scale: 0.8, opacity: 0, y: 50 }}
+                            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                            className="relative max-w-5xl w-full max-h-[90vh] overflow-y-auto rounded-2xl bg-gradient-to-br from-slate-900 via-slate-900 to-purple-950 border border-purple-500/30 shadow-2xl shadow-purple-500/20"
+                            onClick={e => e.stopPropagation()}
+                        >
+                            {/* Close Button */}
+                            <button
+                                onClick={() => setShowPortfolio(false)}
+                                className="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors z-10"
+                            >
+                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+
+                            {/* Header */}
+                            <div className="p-8 pb-0">
+                                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/20 border border-purple-500/30 text-purple-400 text-xs font-bold tracking-widest uppercase mb-4">
+                                    <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
+                                    Global Presence
+                                </div>
+                                <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                                    <GradientText colors={["#a855f7", "#f59e0b", "#00f3ff", "#a855f7"]}>
+                                        Global Portfolio
+                                    </GradientText>
+                                </h2>
+                                <p className="text-white/60 text-lg">
+                                    Explore our landmark infrastructure projects spanning 4 continents.
+                                </p>
+                            </div>
+
+                            {/* Stats Row */}
+                            <div className="px-8 py-6">
+                                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                    {[
+                                        { value: "47", label: "Active Projects" },
+                                        { value: "$12B", label: "Total Investment" },
+                                        { value: "15", label: "Countries" },
+                                        { value: "2M+", label: "Lives Impacted" }
+                                    ].map((stat, i) => (
+                                        <motion.div
+                                            key={i}
+                                            initial={{ opacity: 0, scale: 0.8 }}
+                                            animate={{ opacity: 1, scale: 1 }}
+                                            transition={{ delay: 0.3 + i * 0.1 }}
+                                            className="text-center p-4 rounded-xl bg-white/5 border border-white/10"
+                                        >
+                                            <div className="text-2xl md:text-3xl font-black text-white">{stat.value}</div>
+                                            <div className="text-xs text-white/50 uppercase tracking-wider">{stat.label}</div>
+                                        </motion.div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Project Highlights */}
+                            <div className="p-8 pt-0">
+                                <h3 className="text-lg font-bold text-white mb-4">Featured Projects</h3>
+                                <div className="space-y-4">
+                                    {[
+                                        { name: "Northern Aero-Hub Terminal", location: "Singapore", status: "Operational", value: "$2.8B" },
+                                        { name: "Atlantic Gateway Port", location: "Rotterdam, Netherlands", status: "Construction", value: "$1.5B" },
+                                        { name: "Sahara Solar District", location: "Morocco", status: "Planning", value: "$890M" }
+                                    ].map((project, i) => (
+                                        <motion.div
+                                            key={i}
+                                            initial={{ opacity: 0, x: -20 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            transition={{ delay: 0.4 + i * 0.1 }}
+                                            className="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/10 hover:border-purple-500/30 transition-all"
+                                        >
+                                            <div>
+                                                <h4 className="font-bold text-white">{project.name}</h4>
+                                                <p className="text-white/50 text-sm">{project.location}</p>
+                                            </div>
+                                            <div className="text-right">
+                                                <div className="text-purple-400 font-bold">{project.value}</div>
+                                                <div className={`text-xs px-2 py-1 rounded-full ${project.status === 'Operational' ? 'bg-green-500/20 text-green-400' :
+                                                        project.status === 'Construction' ? 'bg-amber-500/20 text-amber-400' :
+                                                            'bg-blue-500/20 text-blue-400'
+                                                    }`}>{project.status}</div>
+                                            </div>
+                                        </motion.div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* CTA */}
+                            <div className="p-8 pt-0">
+                                <div className="p-6 rounded-xl bg-gradient-to-r from-purple-500/20 to-amber-500/20 border border-purple-500/30">
+                                    <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                                        <div>
+                                            <h4 className="text-xl font-bold text-white mb-1">Download Full Portfolio</h4>
+                                            <p className="text-white/50">Get detailed information on all our projects</p>
+                                        </div>
+                                        <Button className="bg-purple-500 hover:bg-purple-400 text-white font-bold px-6 py-3">
+                                            Download PDF
+                                        </Button>
+                                    </div>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div >
     )
 }

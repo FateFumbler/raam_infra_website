@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 
 interface FloatingParticlesProps {
@@ -15,7 +15,7 @@ export default function FloatingParticles({
     count = 30, // Reduced default from 50+ to 30 for performance
     speed = 0.5,
     color = "#ffffff",
-    size = 21,
+    size = 2,
     connectionDistance = 150,
 }: FloatingParticlesProps) {
     const canvasRef = useRef<HTMLCanvasElement>(null);

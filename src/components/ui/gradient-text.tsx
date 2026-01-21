@@ -13,8 +13,7 @@ export function GradientText({
     children,
     className = "",
     colors = ["#00f3ff", "#5eead4", "#22c55e", "#00f3ff"],
-    animationSpeed = 8,
-    showBorder = false
+    animationSpeed = 8
 }: GradientTextProps) {
     const gradientStyle = {
         backgroundImage: `linear-gradient(90deg, ${colors.join(", ")})`,

@@ -1,9 +1,9 @@
-import React from "react";
+
 import { motion } from "framer-motion";
 import { Separator } from "@/components/ui/separator";
 
 // Simple Avatar component inline if not available standard
-function SimpleAvatar({ src, alt, fallback }: { src: string; alt: string; fallback: string }) {
+function SimpleAvatar({ src, alt }: { src: string; alt: string }) {
     return (
         <div className="relative h-24 w-24 rounded-full overflow-hidden border-2 border-primary ring-4 ring-primary/20 mx-auto mb-4">
             <img src={src} alt={alt} className="h-full w-full object-cover" />
@@ -72,7 +72,7 @@ export default function TeamSection() {
                             viewport={{ once: true }}
                             className="text-center group"
                         >
-                            <SimpleAvatar src={member.image} alt={member.name} fallback={member.name[0]} />
+                            <SimpleAvatar src={member.image} alt={member.name} />
                             <h3 className="text-xl font-semibold text-white group-hover:text-primary transition-colors">
                                 {member.name}
                             </h3>
