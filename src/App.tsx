@@ -6,14 +6,17 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { useRef, useState } from 'react'
 import { GradientText } from './components/ui/gradient-text'
 import { TiltCard } from './components/ui/tilt-card'
-import { MorphingText } from './components/ui/morphing-text'
 import { AnimatedCounter } from './components/ui/animated-counter'
 import { Spotlight } from './components/ui/spotlight'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from './components/ui/tabs'
 import { Separator } from './components/ui/separator'
-import TeamSection from './components/ui/team-section'
-import ProjectGallery from './components/ui/project-gallery'
-import ImpactChart from './components/ui/impact-chart'
+
+// Import images for service capabilities
+import designPlanningImg from './assets/images/design_planning_icon_1770203604060.png'
+import executionImg from './assets/images/execution_construction_1770203620482.png'
+import financialImg from './assets/images/financial_strategy_1770203637085.png'
+import techImg from './assets/images/tech_integration_1770203653002.png'
+import stakeholderImg from './assets/images/stakeholder_trust_1770203669582.png'
+import rendersImg from './assets/images/3d_renders_1770203686165.png'
 
 function App() {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -30,60 +33,70 @@ function App() {
 
     const navItems = [
         { label: "Home", href: "#" },
-        { label: "Services", href: "#pillars" },
-        { label: "Projects", href: "#projects" },
-        { label: "Team", href: "#team" },
-        { label: "Impact", href: "#impact" },
-        { label: "Contact", href: "#footer" },
+        { label: "Capabilities", href: "#capabilities" },
+        { label: "About", href: "#about" },
+        { label: "Contact", href: "#contact" },
     ];
 
-    const pillars = [
+    const capabilities = [
         {
-            title: 'Aero-Hubs',
-            subtitle: 'Terminal Automation & Aero-Cities',
-            desc: 'Pioneering fully autonomous terminal ecosystems and specialized airport-centric urban developments that redefine passenger experience.',
-            icon: '✈️',
+            title: 'Precision Design & Planning',
+            desc: 'Comprehensive architectural and engineering design with master planning expertise for large-scale developments.',
+            image: designPlanningImg,
+            gradient: 'from-blue-500 via-cyan-500 to-teal-500',
+        },
+        {
+            title: 'Execution Excellence',
+            desc: 'End-to-end project execution with rigorous quality controls and timely delivery benchmarks.',
+            image: executionImg,
             gradient: 'from-amber-500 via-orange-500 to-rose-500',
-            stats: { value: 120, label: 'M+ Passengers' }
         },
         {
-            title: 'Maritime Gateways',
-            subtitle: 'Deep-water Ports & Blue Economy',
-            desc: 'Deploying high-throughput logistic centers at the world\'s most strategic maritime intersections for global trade.',
-            icon: '🌊',
-            gradient: 'from-cyan-500 via-blue-500 to-indigo-500',
-            stats: { value: 4.5, label: 'M TEU Capacity' }
-        },
-        {
-            title: 'Urban Ecosystems',
-            subtitle: '15-Minute Cities & Smart Grids',
-            desc: 'Crafting self-balancing smart districts designed for maximum human-centric efficiency and net-zero living.',
-            icon: '🏙️',
+            title: 'Strategic Financial Structuring',
+            desc: 'Financial modeling, investment structuring, and project financing solutions for infrastructure developments.',
+            image: financialImg,
             gradient: 'from-emerald-500 via-green-500 to-teal-500',
-            stats: { value: 18.5, label: 'K Hectares' }
+        },
+        {
+            title: 'Intelligence-Driven Tech',
+            desc: 'Smart infrastructure integration with IoT, automation, and data-driven decision systems.',
+            image: techImg,
+            gradient: 'from-purple-500 via-violet-500 to-indigo-500',
+        },
+        {
+            title: 'Trusted Stakeholder Relations',
+            desc: 'Building strong partnerships with government bodies, investors, and development authorities.',
+            image: stakeholderImg,
+            gradient: 'from-rose-500 via-pink-500 to-fuchsia-500',
+        },
+        {
+            title: 'Immersive 3D Renders',
+            desc: '3D isometric renders securing 100% regulatory approvals with photorealistic visualizations.',
+            image: rendersImg,
+            gradient: 'from-cyan-500 via-blue-500 to-indigo-500',
         }
     ];
 
     const metrics = [
         {
-            label: 'Annual Passenger Capacity',
-            value: 120000000,
-            suffix: '+',
-            sub: 'Global Aero-Hub Network',
+            label: 'Residential Master Plans',
+            value: 5,
+            suffix: 'M+ sq ft',
+            sub: 'Developed Across India',
             color: '#00f3ff'
         },
         {
-            label: 'TEU Cargo Throughput',
-            value: 4500000,
-            suffix: ' TEU',
-            sub: 'Maritime Logistics',
+            label: 'Years of Experience',
+            value: 17,
+            suffix: '+',
+            sub: 'Promoters\' Industry Expertise',
             color: '#22c55e'
         },
         {
-            label: 'Sustainable Urban Living',
-            value: 18500,
-            suffix: ' Ha',
-            sub: 'Net-Zero Districts',
+            label: 'Projects Delivered',
+            value: 7.5,
+            suffix: 'M+ sq ft',
+            sub: 'Residential Portfolio',
             color: '#a855f7'
         }
     ];
@@ -114,10 +127,10 @@ function App() {
                     className="flex flex-col"
                 >
                     <span className="text-lg font-light tracking-wide uppercase">
-                        Raam Infra Dev
+                        RAAM Infrastructure
                     </span>
                     <span className="text-[10px] tracking-[0.3em] uppercase text-white/40 font-normal -mt-0.5">
-                        Global Infrastructure
+                        & Developers LLP
                     </span>
                 </motion.div>
 
@@ -211,43 +224,35 @@ function App() {
                                 <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
                             </span>
                             <span className="text-xs font-semibold tracking-widest uppercase text-white/60">
-                                Shaping Tomorrow's Infrastructure
+                                RAAM Infrastructure & Developers LLP
                             </span>
                         </motion.div>
 
                         {/* Main Headline */}
                         <motion.h1
-                            className="text-4xl md:text-7xl lg:text-[100px] font-thin tracking-tight mb-8 leading-[1.2] pb-2"
+                            className="text-4xl md:text-7xl lg:text-[80px] font-thin tracking-tight mb-8 leading-[1.2] pb-2"
                         >
                             <span className="block text-white/90">
-                                Building the
+                                Engineering India's
                             </span>
                             <span className="block">
                                 <span className="italic font-light text-white">
-                                    Arteries
+                                    Airport
                                 </span>
                                 <span className="text-white/80">
-                                    {" "}of Tomorrow
+                                    {" "}Future
                                 </span>
                             </span>
                         </motion.h1>
 
-                        {/* Sub-headline with Morphing Text */}
+                        {/* Sub-headline */}
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.5, duration: 1 }}
                             className="text-lg md:text-2xl text-white/50 mb-12 max-w-3xl mx-auto font-light leading-relaxed"
                         >
-                            Global-scale infrastructure for{' '}
-                            <MorphingText
-                                texts={['aviation', 'maritime', 'urban districts']}
-                                interval={3000}
-                                colors={['#94a3b8', '#cbd5e1', '#e2e8f0']}
-                                className="font-normal"
-                            />
-                            <br className="hidden md:block" />
-                            {' '}and the next generation of connected worlds.
+                            From Residential Master Planning to Airport Development
                         </motion.div>
 
                         {/* CTA Buttons */}
@@ -296,8 +301,8 @@ function App() {
                     </motion.div>
                 </motion.section>
 
-                {/* Pillars Section */}
-                <section id="pillars" className="py-32 px-4 relative">
+                {/* Capabilities Section */}
+                <section id="capabilities" className="py-32 px-4 relative">
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/50 to-transparent pointer-events-none" />
 
                     <div className="container mx-auto relative z-10">
@@ -307,73 +312,54 @@ function App() {
                             viewport={{ once: true }}
                             className="text-center mb-20"
                         >
-                            <span className="text-xs font-black tracking-[0.5em] uppercase text-cyan-400">Core Foundations</span>
+                            <span className="text-xs font-black tracking-[0.5em] uppercase text-cyan-400">What We Do</span>
                             <h2 className="text-4xl md:text-5xl font-light mt-4 tracking-tight text-white">
-                                The Three Pillars
+                                Service Capabilities
                             </h2>
                             <p className="text-white/40 mt-4 max-w-2xl mx-auto text-lg">
-                                Our integrated approach to infrastructure development spans three interconnected domains.
+                                Our comprehensive expertise spans the entire infrastructure development lifecycle.
                             </p>
                         </motion.div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                            {pillars.map((pillar, idx) => (
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {capabilities.map((capability, idx) => (
                                 <motion.div
                                     key={idx}
                                     initial={{ opacity: 0, y: 50 }}
                                     whileInView={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.8, delay: idx * 0.15 }}
+                                    transition={{ duration: 0.8, delay: idx * 0.1 }}
                                     viewport={{ once: true }}
                                 >
                                     <TiltCard
                                         className="h-full"
-                                        tiltAmount={10}
-                                        glareColor={pillar.gradient.includes('amber') ? 'rgba(245, 158, 11, 0.15)' :
-                                            pillar.gradient.includes('cyan') ? 'rgba(6, 182, 212, 0.15)' :
-                                                'rgba(16, 185, 129, 0.15)'}
+                                        tiltAmount={8}
+                                        glareColor="rgba(6, 182, 212, 0.15)"
                                     >
                                         <Spotlight
                                             className="h-full"
-                                            spotlightColor={pillar.gradient.includes('amber') ? 'rgba(245, 158, 11, 0.1)' :
-                                                pillar.gradient.includes('cyan') ? 'rgba(6, 182, 212, 0.1)' :
-                                                    'rgba(16, 185, 129, 0.1)'}
+                                            spotlightColor="rgba(6, 182, 212, 0.1)"
                                         >
                                             <Card className="bg-white/[0.03] border-white/10 backdrop-blur-2xl overflow-hidden group hover:border-white/20 transition-all duration-500 h-full">
-                                                <CardContent className="p-8 flex flex-col h-full relative">
-                                                    {/* Icon */}
-                                                    <div className={`text-6xl mb-6 group-hover:scale-110 transition-transform duration-500`}>
-                                                        {pillar.icon}
+                                                <CardContent className="p-0 flex flex-col h-full relative">
+                                                    {/* Image */}
+                                                    <div className="w-full h-48 overflow-hidden">
+                                                        <img
+                                                            src={capability.image}
+                                                            alt={capability.title}
+                                                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                                        />
                                                     </div>
 
-                                                    {/* Title */}
-                                                    <h3 className={`text-2xl font-light mb-2 tracking-tight text-white`}>
-                                                        {pillar.title}
-                                                    </h3>
+                                                    <div className="p-6">
+                                                        {/* Title */}
+                                                        <h3 className={`text-xl font-semibold mb-3 tracking-tight text-white`}>
+                                                            {capability.title}
+                                                        </h3>
 
-                                                    {/* Subtitle */}
-                                                    <div className="text-white/50 text-sm font-medium uppercase tracking-widest mb-4">
-                                                        {pillar.subtitle}
-                                                    </div>
-
-                                                    <Separator className="bg-white/10 my-4" />
-
-                                                    {/* Description */}
-                                                    <p className="text-white/40 leading-relaxed text-sm flex-grow">
-                                                        {pillar.desc}
-                                                    </p>
-
-                                                    {/* Stats */}
-                                                    <div className="mt-6 pt-4 border-t border-white/5">
-                                                        <div className={`text-3xl font-black bg-gradient-to-r ${pillar.gradient} bg-clip-text text-transparent`}>
-                                                            <AnimatedCounter
-                                                                target={pillar.stats.value}
-                                                                decimals={pillar.stats.value < 100 ? 1 : 0}
-                                                                delay={idx * 200}
-                                                            />
-                                                        </div>
-                                                        <div className="text-xs text-white/30 uppercase tracking-widest">
-                                                            {pillar.stats.label}
-                                                        </div>
+                                                        {/* Description */}
+                                                        <p className="text-white/40 leading-relaxed text-sm">
+                                                            {capability.desc}
+                                                        </p>
                                                     </div>
                                                 </CardContent>
                                             </Card>
@@ -385,11 +371,8 @@ function App() {
                     </div>
                 </section>
 
-                <ProjectGallery />
-                <TeamSection />
-
-                {/* Impact Dashboard with Tabs */}
-                <section id="impact" className="py-32 relative overflow-hidden">
+                {/* About Us Section */}
+                <section id="about" className="py-32 relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/5 via-transparent to-purple-500/5 pointer-events-none" />
 
                     <div className="container mx-auto px-4 relative z-10">
@@ -399,16 +382,28 @@ function App() {
                             viewport={{ once: true }}
                             className="text-center mb-16"
                         >
-                            <span className="text-xs font-black tracking-[0.5em] uppercase text-cyan-400">Measurable Impact</span>
-                            <h2 className="text-4xl md:text-6xl font-black mt-4 tracking-tight">
-                                <GradientText colors={["#00f3ff", "#22c55e", "#a855f7", "#00f3ff"]}>
-                                    Impact Dashboard
-                                </GradientText>
+                            <span className="text-xs font-black tracking-[0.5em] uppercase text-cyan-400">Who We Are</span>
+                            <h2 className="text-4xl md:text-6xl font-light mt-4 tracking-tight text-white">
+                                About Us
                             </h2>
                         </motion.div>
 
-                        {/* Metrics Grid */}
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-20">
+                        {/* Company Description */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="max-w-4xl mx-auto mb-16"
+                        >
+                            <div className="p-8 rounded-2xl bg-white/[0.02] border border-white/10 backdrop-blur-md">
+                                <p className="text-white/60 text-lg leading-relaxed text-center">
+                                    <span className="text-white font-semibold">RAAM Infrastructure and Developers LLP</span> specializes in comprehensive real estate development with its promoters having a portfolio of <span className="text-cyan-400 font-semibold">7.5+ million sq ft</span> residential projects across India since 2009. With proven expertise from master planning to large-scale project execution, we are strategically expanding into <span className="text-cyan-400 font-semibold">airport infrastructure development</span>. Our residential success provides the perfect foundation for aviation opportunities.
+                                </p>
+                            </div>
+                        </motion.div>
+
+                        {/* Stats Grid */}
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                             {metrics.map((metric, idx) => (
                                 <motion.div
                                     key={idx}
@@ -442,53 +437,6 @@ function App() {
                                 </motion.div>
                             ))}
                         </div>
-
-                        {/* Chart Section */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            className="max-w-4xl mx-auto mb-20 bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-md"
-                        >
-                            <ImpactChart />
-                        </motion.div>
-
-                        {/* Tabs Section */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            className="max-w-4xl mx-auto"
-                        >
-                            <Tabs defaultValue="vision" className="w-full">
-                                <TabsList className="grid w-full grid-cols-3 bg-white/5 p-1 rounded-xl">
-                                    <TabsTrigger value="vision" className="rounded-lg data-[state=active]:bg-cyan-500/20 data-[state=active]:text-cyan-400">Our Vision</TabsTrigger>
-                                    <TabsTrigger value="approach" className="rounded-lg data-[state=active]:bg-cyan-500/20 data-[state=active]:text-cyan-400">Our Approach</TabsTrigger>
-                                    <TabsTrigger value="future" className="rounded-lg data-[state=active]:bg-cyan-500/20 data-[state=active]:text-cyan-400">The Future</TabsTrigger>
-                                </TabsList>
-                                <TabsContent value="vision" className="mt-8 p-8 rounded-2xl bg-white/[0.02] border border-white/10">
-                                    <h3 className="text-2xl font-bold mb-4 text-white">Redefining Infrastructure</h3>
-                                    <p className="text-white/50 leading-relaxed">
-                                        We envision a world where infrastructure is not just built, but intelligently designed to evolve with humanity.
-                                        Our projects integrate cutting-edge technology with sustainable practices to create lasting value for generations.
-                                    </p>
-                                </TabsContent>
-                                <TabsContent value="approach" className="mt-8 p-8 rounded-2xl bg-white/[0.02] border border-white/10">
-                                    <h3 className="text-2xl font-bold mb-4 text-white">Integrated Development</h3>
-                                    <p className="text-white/50 leading-relaxed">
-                                        Our approach combines digital twin technology, AI-driven planning, and human-centric design principles.
-                                        Every project begins with deep analysis and ends with transformative impact.
-                                    </p>
-                                </TabsContent>
-                                <TabsContent value="future" className="mt-8 p-8 rounded-2xl bg-white/[0.02] border border-white/10">
-                                    <h3 className="text-2xl font-bold mb-4 text-white">Building Tomorrow</h3>
-                                    <p className="text-white/50 leading-relaxed">
-                                        The future of infrastructure is connected, sustainable, and adaptive. We're pioneering developments that will
-                                        define how cities grow, how people move, and how economies thrive in the coming decades.
-                                    </p>
-                                </TabsContent>
-                            </Tabs>
-                        </motion.div>
                     </div>
                 </section>
 
@@ -531,40 +479,44 @@ function App() {
             </main>
 
             {/* Footer */}
-            <footer id="footer" className="py-16 px-8 border-t border-white/5 relative z-10 bg-black/50 backdrop-blur-xl">
+            <footer id="contact" className="py-16 px-8 border-t border-white/5 relative z-10 bg-black/50 backdrop-blur-xl">
                 <div className="container mx-auto">
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
                         <div className="col-span-1 md:col-span-2">
-                            <span className="text-2xl font-black">
+                            <span className="text-2xl font-semibold">
                                 <GradientText colors={["#00f3ff", "#22c55e", "#a855f7", "#00f3ff"]}>
-                                    Raam Infra Dev
+                                    RAAM Infrastructure
                                 </GradientText>
                             </span>
                             <p className="text-white/40 mt-4 max-w-md leading-relaxed">
-                                Pioneering global infrastructure development across aviation, maritime, and urban ecosystems.
-                                Building the arteries that connect tomorrow's world.
+                                RAAM Infrastructure and Developers LLP specializes in comprehensive real estate development and airport infrastructure.
                             </p>
                         </div>
                         <div>
-                            <h4 className="font-bold text-white mb-4 uppercase tracking-wider text-sm">Sectors</h4>
+                            <h4 className="font-bold text-white mb-4 uppercase tracking-wider text-sm">Quick Links</h4>
                             <ul className="space-y-2 text-white/40">
-                                <li><a href="#" className="hover:text-cyan-400 transition-colors">Aero-Hubs</a></li>
-                                <li><a href="#" className="hover:text-cyan-400 transition-colors">Maritime Gateways</a></li>
-                                <li><a href="#" className="hover:text-cyan-400 transition-colors">Urban Ecosystems</a></li>
+                                <li><a href="#" className="hover:text-cyan-400 transition-colors">Home</a></li>
+                                <li><a href="#capabilities" className="hover:text-cyan-400 transition-colors">Capabilities</a></li>
+                                <li><a href="#about" className="hover:text-cyan-400 transition-colors">About Us</a></li>
                             </ul>
                         </div>
                         <div>
-                            <h4 className="font-bold text-white mb-4 uppercase tracking-wider text-sm">Connect</h4>
+                            <h4 className="font-bold text-white mb-4 uppercase tracking-wider text-sm">Contact Us</h4>
                             <ul className="space-y-2 text-white/40">
-                                <li><a href="https://raminfradev.com" className="hover:text-cyan-400 transition-colors">raminfradev.com</a></li>
-                                <li><a href="#" className="hover:text-cyan-400 transition-colors">LinkedIn</a></li>
-                                <li><a href="#" className="hover:text-cyan-400 transition-colors">Contact Us</a></li>
+                                <li>
+                                    <a href="mailto:contact@raaminfra.com" className="hover:text-cyan-400 transition-colors">
+                                        contact@raaminfra.com
+                                    </a>
+                                </li>
                             </ul>
+                            <p className="text-white/30 mt-4 text-sm">
+                                For any queries, drop us an email.
+                            </p>
                         </div>
                     </div>
                     <Separator className="bg-white/10 mb-8" />
                     <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-white/30 text-sm">
-                        <p>© 2026 Raam Infrastructure Development Corp. All rights reserved.</p>
+                        <p>© 2026 RAAM Infrastructure and Developers LLP. All rights reserved.</p>
                         <div className="flex gap-6">
                             <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
                             <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
