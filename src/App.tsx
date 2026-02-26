@@ -30,6 +30,7 @@ function App() {
     // Modal states
     const [showPortfolio, setShowPortfolio] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [expandedCapability, setExpandedCapability] = useState<number | null>(null);
 
     const navItems = [
         { label: "Home", href: "#" },
@@ -131,14 +132,14 @@ function App() {
             {/* FloatingParticles removed for cleaner background visibility */}
 
             {/* Header / Nav */}
-            <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between p-4 md:px-12 backdrop-blur-xl bg-stone-200/80 border-b border-stone-300/50 shadow-sm">
+            <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between py-2 px-4 md:px-10 backdrop-blur-xl bg-stone-200/80 border-b border-stone-300/50 shadow-sm">
                 {/* Logo */}
                 <motion.div
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     className="flex items-center"
                 >
-                    <img src={logoImg} alt="RAAM Infrastructure & Developers LLP" className="h-14 md:h-20 w-auto drop-shadow-md" />
+                    <img src={logoImg} alt="RAAM Infrastructure & Developers LLP" className="h-10 md:h-14 w-auto drop-shadow-md" />
                 </motion.div>
 
                 {/* Desktop Nav - Centered */}
@@ -321,54 +322,86 @@ function App() {
                             </p>
                         </motion.div>
 
-                        <div className="flex flex-col gap-6">
-                            {capabilities.map((capability, idx) => (
-                                <motion.div
-                                    key={idx}
-                                    initial={{ opacity: 0, y: 30 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.6, delay: 0.1 }}
-                                    viewport={{ once: true }}
-                                >
-                                    <Card className="bg-white/30 border-white/40 backdrop-blur-sm overflow-hidden hover:bg-white/45 transition-all duration-400 shadow-sm hover:shadow-md">
-                                        <CardContent className="p-5">
-                                            <div className="flex gap-5">
-                                                {/* Image */}
-                                                <div className="w-28 h-28 flex-shrink-0 rounded-xl overflow-hidden">
-                                                    <img
-                                                        src={capability.image}
-                                                        alt={capability.title}
-                                                        className="w-full h-full object-cover"
-                                                    />
-                                                </div>
+                        <div className="flex flex-col gap-5">
+                            {capabilities.map((capability, idx) => {
+                                const isExpanded = expandedCapability === idx;
+                                return (
+                                    <motion.div
+                                        key={idx}
+                                        initial={{ opacity: 0, y: 30 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        transition={{ duration: 0.6, delay: 0.1 }}
+                                        viewport={{ once: true }}
+                                    >
+                                        <Card
+                                            className="bg-white/30 border-white/40 backdrop-blur-sm overflow-hidden hover:bg-white/45 transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer"
+                                            onClick={() => setExpandedCapability(isExpanded ? null : idx)}
+                                        >
+                                            <CardContent className="p-5">
+                                                <div className="flex gap-4">
+                                                    {/* Image */}
+                                                    <div className="w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden">
+                                                        <img
+                                                            src={capability.image}
+                                                            alt={capability.title}
+                                                            className="w-full h-full object-cover"
+                                                        />
+                                                    </div>
 
-                                                {/* Content */}
-                                                <div className="flex-1 min-w-0">
-                                                    <h3 className="text-base font-semibold mb-1 tracking-tight text-slate-800">
-                                                        {capability.title}
-                                                    </h3>
-                                                    <p className="text-slate-500 leading-relaxed text-xs mb-2">
-                                                        {capability.desc}
-                                                    </p>
-                                                    <p className="text-slate-400 leading-relaxed text-[11px] mb-3">
-                                                        {capability.detail}
-                                                    </p>
-                                                    <div className="flex flex-wrap gap-1.5">
-                                                        {capability.highlights.map((tag, i) => (
-                                                            <span
-                                                                key={i}
-                                                                className="px-2 py-0.5 rounded-full bg-white/40 border border-stone-200/50 text-[10px] font-medium text-stone-500 tracking-wide"
+                                                    {/* Content */}
+                                                    <div className="flex-1 min-w-0">
+                                                        <div className="flex items-start justify-between gap-2">
+                                                            <div>
+                                                                <h3 className="text-sm font-semibold tracking-tight text-slate-800">
+                                                                    {capability.title}
+                                                                </h3>
+                                                                <p className="text-slate-500 leading-relaxed text-xs mt-1">
+                                                                    {capability.desc}
+                                                                </p>
+                                                            </div>
+                                                            <motion.svg
+                                                                animate={{ rotate: isExpanded ? 180 : 0 }}
+                                                                transition={{ duration: 0.3 }}
+                                                                className="w-4 h-4 text-slate-400 flex-shrink-0 mt-1"
+                                                                fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                                             >
-                                                                {tag}
-                                                            </span>
-                                                        ))}
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                                            </motion.svg>
+                                                        </div>
+
+                                                        {/* Expandable Detail */}
+                                                        <AnimatePresence>
+                                                            {isExpanded && (
+                                                                <motion.div
+                                                                    initial={{ height: 0, opacity: 0 }}
+                                                                    animate={{ height: 'auto', opacity: 1 }}
+                                                                    exit={{ height: 0, opacity: 0 }}
+                                                                    transition={{ duration: 0.3, ease: 'easeInOut' }}
+                                                                    className="overflow-hidden"
+                                                                >
+                                                                    <p className="text-slate-400 leading-relaxed text-[11px] mt-3 mb-3">
+                                                                        {capability.detail}
+                                                                    </p>
+                                                                    <div className="flex flex-wrap gap-1.5">
+                                                                        {capability.highlights.map((tag, i) => (
+                                                                            <span
+                                                                                key={i}
+                                                                                className="px-2 py-0.5 rounded-full bg-white/40 border border-stone-200/50 text-[10px] font-medium text-stone-500 tracking-wide"
+                                                                            >
+                                                                                {tag}
+                                                                            </span>
+                                                                        ))}
+                                                                    </div>
+                                                                </motion.div>
+                                                            )}
+                                                        </AnimatePresence>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </CardContent>
-                                    </Card>
-                                </motion.div>
-                            ))}
+                                            </CardContent>
+                                        </Card>
+                                    </motion.div>
+                                );
+                            })}
                         </div>
                     </div>
                 </section>
