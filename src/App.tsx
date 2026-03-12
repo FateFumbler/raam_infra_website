@@ -10,7 +10,6 @@ import { Separator } from './components/ui/separator'
 import logoImg from './assets/images/logo.png'
 
 // Section images
-import heroImg from './assets/images/hero_urban_india.png'
 import strategicPlanningImg from './assets/images/strategic_planning.png'
 import executionDisciplineImg from './assets/images/execution_discipline.png'
 import designIntelligenceImg from './assets/images/design_intelligence.png'
@@ -216,11 +215,6 @@ function App() {
                     style={{ opacity: heroOpacity, scale: heroScale }}
                     className="min-h-screen flex flex-col items-center justify-center px-4 text-center pt-32 relative"
                 >
-                    {/* Hero background image */}
-                    <div className="absolute inset-0 z-0">
-                        <img src={heroImg} alt="" className="w-full h-full object-cover opacity-20" />
-                        <div className="absolute inset-0 bg-gradient-to-b from-stone-100/60 via-transparent to-stone-100" />
-                    </div>
 
                     <motion.div
                         initial={{ opacity: 0, y: 40 }}
