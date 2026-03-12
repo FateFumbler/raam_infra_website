@@ -5,118 +5,133 @@ import { Card, CardContent } from './components/ui/card'
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { useRef, useState } from 'react'
 import { GradientText } from './components/ui/gradient-text'
-
 import { AnimatedCounter } from './components/ui/animated-counter'
-
 import { Separator } from './components/ui/separator'
 import logoImg from './assets/images/logo.png'
 
-// Import images for service capabilities
-import designPlanningImg from './assets/images/design_planning_icon_1770203604060.png'
-import executionImg from './assets/images/execution_construction_1770203620482.png'
-import financialImg from './assets/images/financial_strategy_1770203637085.png'
-import techImg from './assets/images/tech_integration_1770203653002.png'
-import stakeholderImg from './assets/images/stakeholder_trust_1770203669582.png'
-import rendersImg from './assets/images/3d_renders_1770203686165.png'
+// Section images
+import heroImg from './assets/images/hero_urban_india.png'
+import strategicPlanningImg from './assets/images/strategic_planning.png'
+import executionDisciplineImg from './assets/images/execution_discipline.png'
+import designIntelligenceImg from './assets/images/design_intelligence.png'
+import masterPlanningImg from './assets/images/master_planning.png'
+import residentialImg from './assets/images/residential_development.png'
+import financialImg from './assets/images/financial_structuring.png'
+import regulatoryImg from './assets/images/regulatory_compliance.png'
+import aboutCorporateImg from './assets/images/about_corporate.png'
+import projectExperienceImg from './assets/images/project_experience.png'
+import industryForumImg from './assets/images/industry_forum.png'
 
 function App() {
     const containerRef = useRef<HTMLDivElement>(null);
     const heroRef = useRef<HTMLElement>(null);
     const { scrollYProgress } = useScroll();
 
-    const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
-    const heroScale = useTransform(scrollYProgress, [0, 0.2], [1, 0.95]);
+    const heroOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
+    const heroScale = useTransform(scrollYProgress, [0, 0.15], [1, 0.95]);
 
-    // Modal states
-    const [showPortfolio, setShowPortfolio] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [expandedCapability, setExpandedCapability] = useState<number | null>(null);
 
     const navItems = [
         { label: "Home", href: "#" },
-        { label: "Capabilities", href: "#capabilities" },
         { label: "About", href: "#about" },
+        { label: "Capabilities", href: "#capabilities" },
+        { label: "Experience", href: "#experience" },
+        { label: "News", href: "#news" },
         { label: "Contact", href: "#contact" },
+    ];
+
+    const credibilityHighlights = [
+        { value: '17+', label: 'Years Promoter Experience' },
+        { value: '7.5M+', label: 'Sq Ft Residential Portfolio' },
+        { value: '✓', label: 'Integrated Township Planning' },
+        { value: '✓', label: 'Compliance Framework' },
+    ];
+
+    const coreStrengths = [
+        {
+            title: 'Strategic Development Planning',
+            desc: 'Comprehensive land assessment, phased modeling, and optimized land-use planning aligned with regulatory frameworks.',
+            image: strategicPlanningImg,
+        },
+        {
+            title: 'Execution Discipline',
+            desc: 'Structured vendor management, milestone-based monitoring, and capital efficiency across development cycles.',
+            image: executionDisciplineImg,
+        },
+        {
+            title: 'Design & Planning Intelligence',
+            desc: '3D visualization systems, compliance-led planning, and simulation-driven master planning.',
+            image: designIntelligenceImg,
+        },
     ];
 
     const capabilities = [
         {
-            title: 'Precision Design & Planning',
-            desc: 'Comprehensive architectural and engineering design with master planning expertise for large-scale developments.',
-            detail: 'Our design philosophy integrates cutting-edge urban planning methodologies with sustainable architecture principles. From initial concept through detailed engineering drawings, we ensure every project meets the highest standards of functionality, aesthetics, and regulatory compliance. Our team coordinates across disciplines to deliver cohesive master plans that maximize land utilization while creating livable, future-ready communities.',
-            highlights: ['Master Planning', 'Architectural Design', 'Regulatory Compliance', 'Sustainable Design'],
-            image: designPlanningImg,
-            gradient: 'from-blue-500 via-cyan-500 to-teal-500',
+            title: 'Integrated Master Planning',
+            desc: 'Our planning approach aligns design, compliance, and monetization strategy from inception.',
+            bullets: ['Large parcel land planning and zoning optimization', 'Phased township modeling', 'Infrastructure layout design', 'Utility and circulation planning', 'Amenity and ecosystem integration'],
+            image: masterPlanningImg,
         },
         {
-            title: 'Execution Excellence',
-            desc: 'End-to-end project execution with rigorous quality controls and timely delivery benchmarks.',
-            detail: 'With a proven track record of delivering over 7.5 million sq ft of residential developments, our execution capabilities are built on decades of hands-on experience. We employ advanced project management frameworks, real-time progress tracking, and multi-tier quality assurance processes to ensure every milestone is met on time and within budget. Safety and sustainability remain at the core of every construction phase.',
-            highlights: ['Quality Assurance', 'Timeline Management', 'Safety Protocols', 'Budget Control'],
-            image: executionImg,
-            gradient: 'from-amber-500 via-orange-500 to-rose-500',
+            title: 'Residential & Urban Development',
+            desc: 'We focus on scalable, livable, and regulatory-aligned development models.',
+            bullets: ['Mid-rise and high-rise development models', 'Integrated township ecosystems', 'Mixed-use cluster planning', 'Community-centric residential layouts', 'Infrastructure-supported housing models'],
+            image: residentialImg,
         },
         {
-            title: 'Strategic Financial Structuring',
-            desc: 'Financial modeling, investment structuring, and project financing solutions for infrastructure developments.',
-            detail: 'Infrastructure development demands sophisticated financial planning. Our team crafts tailored financial models, secures strategic funding partnerships, and structures investments to optimize returns while minimizing risk exposure. From public-private partnerships to institutional financing, we navigate the complex financial landscape to bring ambitious projects to life with sustainable capital strategies.',
-            highlights: ['Financial Modeling', 'Investment Structuring', 'PPP Frameworks', 'Risk Management'],
+            title: 'Development Structuring & Financial Planning',
+            desc: 'Our development approach integrates financial discipline with execution realism.',
+            bullets: ['Feasibility analysis and viability assessment', 'Phased capital allocation strategy', 'Risk modeling and mitigation frameworks', 'Cost optimization planning', 'Lifecycle asset modeling'],
             image: financialImg,
-            gradient: 'from-emerald-500 via-green-500 to-teal-500',
         },
         {
-            title: 'Intelligence-Driven Tech',
-            desc: 'Smart infrastructure integration with IoT, automation, and data-driven decision systems.',
-            detail: 'We harness the power of emerging technologies to build intelligent infrastructure ecosystems. Our solutions incorporate IoT sensor networks, AI-powered analytics platforms, and automated building management systems that transform static structures into responsive, data-driven environments. From smart energy grids to predictive maintenance systems, technology is embedded into the fabric of every development.',
-            highlights: ['IoT Integration', 'AI Analytics', 'Smart Systems', 'Predictive Maintenance'],
-            image: techImg,
-            gradient: 'from-purple-500 via-violet-500 to-indigo-500',
+            title: 'Regulatory & Approval Strategy',
+            desc: 'Regulatory readiness is embedded into every stage of our planning process.',
+            bullets: ['Land-use compliance strategy', 'Coordination with statutory authorities', 'Documentation and submission frameworks', 'Approval-driven planning models', 'Environmental and zoning alignment'],
+            image: regulatoryImg,
         },
         {
-            title: 'Trusted Stakeholder Relations',
-            desc: 'Building strong partnerships with government bodies, investors, and development authorities.',
-            detail: 'Successful infrastructure projects require trust and collaboration across multiple stakeholders. We have cultivated deep relationships with government agencies, regulatory bodies, financial institutions, and community organizations. Our transparent communication approach and proven delivery track record ensure alignment of interests, smooth approvals, and sustained support throughout the project lifecycle.',
-            highlights: ['Government Liaison', 'Investor Relations', 'Community Engagement', 'Regulatory Navigation'],
-            image: stakeholderImg,
-            gradient: 'from-rose-500 via-pink-500 to-fuchsia-500',
+            title: 'Execution & Delivery Oversight',
+            desc: 'Execution is monitored through structured and measurable control systems.',
+            bullets: ['Contractor and consultant integration', 'Project milestone tracking systems', 'Budget monitoring frameworks', 'Quality assurance protocols', 'Vendor management structure'],
+            image: executionDisciplineImg,
         },
         {
-            title: 'Immersive 3D Renders',
-            desc: '3D isometric renders securing 100% regulatory approvals with photorealistic visualizations.',
-            detail: 'Our visualization studio produces stunning photorealistic 3D renders and isometric views that bring projects to life before a single brick is laid. These detailed visualizations serve as powerful tools for investor presentations, marketing campaigns, and regulatory submissions — achieving a 100% approval rate. Interactive walkthroughs and aerial perspectives allow stakeholders to experience the final product in vivid detail.',
-            highlights: ['Photorealistic Renders', 'Interactive Walkthroughs', 'Aerial Perspectives', 'Investor Presentations'],
-            image: rendersImg,
-            gradient: 'from-cyan-500 via-blue-500 to-indigo-500',
-        }
+            title: 'Design & Visualization Intelligence',
+            desc: 'Visualization tools enhance clarity, stakeholder alignment, and approval efficiency.',
+            bullets: ['3D master planning renders', 'Phased development simulations', 'Layout optimization models', 'Regulatory presentation drawings'],
+            image: designIntelligenceImg,
+        },
+    ];
+
+    const governanceItems = [
+        'Defined capital contribution framework',
+        'Structured profit-sharing mechanism',
+        'Clearly demarcated management authority',
+        'LLP Act compliant governance',
+        'Formal arbitration and dispute resolution mechanism',
+        'Transparent accounting and audit systems',
+    ];
+
+    const lifecycleSteps = [
+        { step: '01', title: 'Land Strategy & Feasibility' },
+        { step: '02', title: 'Master Planning & Concept Modeling' },
+        { step: '03', title: 'Regulatory Alignment & Approvals' },
+        { step: '04', title: 'Phased Execution & Delivery' },
+        { step: '05', title: 'Stabilization & Asset Monetization' },
     ];
 
     const metrics = [
-        {
-            label: 'Residential Master Plans',
-            value: 5,
-            suffix: 'M+ sq ft',
-            sub: 'Developed Across India',
-            color: '#00f3ff'
-        },
-        {
-            label: 'Years of Experience',
-            value: 17,
-            suffix: '+',
-            sub: 'Promoters\' Industry Expertise',
-            color: '#22c55e'
-        },
-        {
-            label: 'Projects Delivered',
-            value: 7.5,
-            suffix: 'M+ sq ft',
-            sub: 'Residential Portfolio',
-            color: '#a855f7'
-        }
+        { label: 'Residential Portfolio', value: 7.5, suffix: 'M+ sq ft', sub: 'Delivered Since 2009', color: '#00f3ff' },
+        { label: 'Promoter Experience', value: 17, suffix: '+ Years', sub: 'Industry Expertise', color: '#22c55e' },
+        { label: 'Residential Master Plans', value: 5, suffix: 'M+ sq ft', sub: 'Across India', color: '#a855f7' },
     ];
 
     return (
         <div ref={containerRef} className="relative min-h-screen text-slate-800 font-sans selection:bg-cyan-500/30 overflow-x-hidden bg-gradient-to-br from-stone-100 to-gray-200">
-            {/* Layered Backgrounds */}
+            {/* Layered Background */}
             <div className="fixed inset-0 z-0">
                 <ColorBends
                     speed={0.15}
@@ -129,27 +144,17 @@ function App() {
                     transparent={true}
                 />
             </div>
-            {/* FloatingParticles removed for cleaner background visibility */}
 
             {/* Header / Nav */}
             <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between py-2 px-4 md:px-10 backdrop-blur-xl bg-stone-200/80 border-b border-stone-300/50 shadow-sm">
-                {/* Logo */}
-                <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    className="flex items-center"
-                >
+                <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="flex items-center">
                     <img src={logoImg} alt="RAAM Infrastructure & Developers LLP" className="h-10 md:h-14 w-auto drop-shadow-md" />
                 </motion.div>
-
-                {/* Desktop Nav - Centered */}
                 <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2">
                     <div className="px-6 py-2">
                         <GooeyNav items={navItems} initialActiveIndex={0} />
                     </div>
                 </div>
-
-                {/* Mobile Menu Button */}
                 <motion.button
                     className="md:hidden p-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition-colors text-slate-700"
                     initial={{ opacity: 0, x: 20 }}
@@ -164,8 +169,6 @@ function App() {
                         )}
                     </svg>
                 </motion.button>
-
-                {/* Spacer for desktop to balance layout */}
                 <div className="hidden md:block w-[120px]" />
             </header>
 
@@ -194,7 +197,6 @@ function App() {
                                 </motion.a>
                             ))}
                         </div>
-                        {/* Close button */}
                         <button
                             className="absolute top-6 right-6 p-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition-colors text-slate-700"
                             onClick={() => setMobileMenuOpen(false)}
@@ -208,19 +210,25 @@ function App() {
             </AnimatePresence>
 
             <main className="relative z-10">
-                {/* Hero Section */}
+                {/* ===== 1. HOME / HERO ===== */}
                 <motion.section
                     ref={heroRef}
                     style={{ opacity: heroOpacity, scale: heroScale }}
-                    className="min-h-screen flex flex-col items-center justify-center px-4 text-center pt-48"
+                    className="min-h-screen flex flex-col items-center justify-center px-4 text-center pt-32 relative"
                 >
+                    {/* Hero background image */}
+                    <div className="absolute inset-0 z-0">
+                        <img src={heroImg} alt="" className="w-full h-full object-cover opacity-20" />
+                        <div className="absolute inset-0 bg-gradient-to-b from-stone-100/60 via-transparent to-stone-100" />
+                    </div>
+
                     <motion.div
                         initial={{ opacity: 0, y: 40 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                        className="max-w-6xl"
+                        className="max-w-6xl relative z-10"
                     >
-                        {/* Pre-headline */}
+                        {/* Pre-headline badge */}
                         <motion.div
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
@@ -236,47 +244,39 @@ function App() {
                             </span>
                         </motion.div>
 
-                        {/* Main Headline */}
-                        <motion.h1
-                            className="text-4xl md:text-7xl lg:text-[80px] font-thin tracking-tight mb-8 leading-[1.2] pb-2"
-                        >
-                            <span className="block text-slate-800">
-                                Engineering India's
-                            </span>
+                        {/* Headline */}
+                        <motion.h1 className="text-3xl md:text-6xl lg:text-[70px] font-thin tracking-tight mb-6 leading-[1.2]">
+                            <span className="block text-slate-800">Building Integrated</span>
                             <span className="block">
-                                <span className="italic font-light text-slate-900">
-                                    Airport
-                                </span>
-                                <span className="text-slate-600">
-                                    {" "}Future
-                                </span>
+                                <span className="italic font-light text-slate-900">Infrastructure</span>
+                                <span className="text-slate-600"> for Tomorrow's</span>
                             </span>
+                            <span className="block text-slate-700">Urban India</span>
                         </motion.h1>
 
-                        {/* Sub-headline */}
-                        <motion.div
+                        {/* Subtext */}
+                        <motion.p
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.5, duration: 1 }}
-                            className="text-lg md:text-2xl text-slate-500 mb-12 max-w-3xl mx-auto font-light leading-relaxed"
+                            className="text-base md:text-xl text-slate-500 mb-10 max-w-3xl mx-auto font-light leading-relaxed"
                         >
-                            From Residential Master Planning to Airport Development
-                        </motion.div>
+                            RAAM Infrastructure Developers LLP is a multidisciplinary development platform focused on master planning, structured real estate development, and infrastructure-led growth across emerging urban corridors.
+                        </motion.p>
 
-                        {/* CTA Buttons */}
+                        {/* Credibility Highlights */}
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.8 }}
-                            className="flex flex-wrap justify-center gap-6"
+                            transition={{ delay: 0.7 }}
+                            className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-4xl mx-auto mb-12"
                         >
-                            <Button
-                                size="lg"
-                                className="rounded-none border border-slate-400 bg-stone-600 backdrop-blur-md text-white hover:bg-stone-700 px-10 py-6 text-sm font-medium tracking-widest uppercase transition-all shadow-lg"
-                                onClick={() => setShowPortfolio(true)}
-                            >
-                                View Global Portfolio
-                            </Button>
+                            {credibilityHighlights.map((item, idx) => (
+                                <div key={idx} className="px-4 py-3 rounded-xl bg-white/50 border border-gray-200/80 backdrop-blur-sm">
+                                    <div className="text-xl font-bold text-slate-800">{item.value}</div>
+                                    <div className="text-[11px] text-slate-500 uppercase tracking-wider font-medium">{item.label}</div>
+                                </div>
+                            ))}
                         </motion.div>
 
                         {/* Scroll Indicator */}
@@ -284,7 +284,7 @@ function App() {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 1.5 }}
-                            className="mt-20"
+                            className="mt-8"
                         >
                             <motion.div
                                 animate={{ y: [0, 10, 0] }}
@@ -300,12 +300,156 @@ function App() {
                     </motion.div>
                 </motion.section>
 
-                {/* Spacer */}
-                <div className="h-16" />
+                {/* Positioning Statement */}
+                <section className="py-20 px-4 relative">
+                    <div className="container mx-auto max-w-5xl">
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="p-8 md:p-12 rounded-2xl bg-white/50 border border-gray-200 backdrop-blur-md shadow-sm"
+                        >
+                            <p className="text-slate-600 text-lg leading-relaxed mb-4">
+                                <span className="text-slate-800 font-semibold">RAAM Infrastructure Developers LLP</span> combines execution depth with disciplined project structuring. Our approach integrates land intelligence, regulatory planning, financial modeling, and phased development strategies to create scalable and sustainable built environments.
+                            </p>
+                            <p className="text-slate-500 text-lg leading-relaxed">
+                                We operate with institutional governance standards, defined capital structure, and a long-term asset development perspective.
+                            </p>
+                        </motion.div>
 
-                {/* Capabilities Section */}
+                        {/* Core Strengths - 3 Column */}
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+                            {coreStrengths.map((strength, idx) => (
+                                <motion.div
+                                    key={idx}
+                                    initial={{ opacity: 0, y: 40 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.6, delay: idx * 0.15 }}
+                                    viewport={{ once: true }}
+                                >
+                                    <Card className="bg-white/40 border-gray-200/80 backdrop-blur-sm overflow-hidden hover:bg-white/60 transition-all duration-400 shadow-sm hover:shadow-lg h-full group">
+                                        <div className="w-full h-48 overflow-hidden">
+                                            <img src={strength.image} alt={strength.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                                        </div>
+                                        <CardContent className="p-6">
+                                            <h3 className="text-lg font-semibold text-slate-800 mb-2">{strength.title}</h3>
+                                            <p className="text-slate-500 text-sm leading-relaxed">{strength.desc}</p>
+                                        </CardContent>
+                                    </Card>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+                {/* ===== 2. ABOUT RAAM ===== */}
+                <section id="about" className="py-32 relative overflow-hidden">
+                    <div className="container mx-auto px-4 relative z-10">
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="text-center mb-16"
+                        >
+                            <span className="text-xs font-black tracking-[0.5em] uppercase text-gray-500">About RAAM</span>
+                            <h2 className="text-3xl md:text-5xl font-light mt-4 tracking-tight text-slate-800 leading-tight">
+                                Institutional Structure.<br className="hidden md:block" /> Execution Depth. Long-Term Vision.
+                            </h2>
+                        </motion.div>
+
+                        {/* Corporate Overview with image */}
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-6xl mx-auto mb-16">
+                            <motion.div
+                                initial={{ opacity: 0, x: -30 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                className="rounded-2xl overflow-hidden shadow-lg"
+                            >
+                                <img src={aboutCorporateImg} alt="RAAM Infrastructure Corporate" className="w-full h-full object-cover min-h-[300px]" />
+                            </motion.div>
+                            <motion.div
+                                initial={{ opacity: 0, x: 30 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                className="flex flex-col justify-center"
+                            >
+                                <h3 className="text-2xl font-semibold text-slate-800 mb-4">Corporate Overview</h3>
+                                <p className="text-slate-600 leading-relaxed mb-4">
+                                    RAAM Infrastructure Developers LLP is incorporated under the Limited Liability Partnership Act, 2008, with a structured governance and capital framework designed for scalable infrastructure development.
+                                </p>
+                                <p className="text-slate-600 leading-relaxed mb-4">
+                                    The promoters bring over 17 years of industry experience across residential master planning and integrated township execution. Since 2009, the promoter-led portfolio has conceptualized, planned, and delivered over 7.5 million square feet of residential developments across India.
+                                </p>
+                                <p className="text-slate-500 leading-relaxed">
+                                    RAAM operates with a disciplined capital contribution structure, defined management authority, and compliance-backed operational processes. The LLP framework ensures clarity in decision-making, accountability, and long-term continuity.
+                                </p>
+                            </motion.div>
+                        </div>
+
+                        {/* Governance & Compliance */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="max-w-4xl mx-auto mb-16"
+                        >
+                            <h3 className="text-xl font-semibold text-slate-800 mb-6 text-center">Governance & Compliance</h3>
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                                {governanceItems.map((item, idx) => (
+                                    <motion.div
+                                        key={idx}
+                                        initial={{ opacity: 0, scale: 0.95 }}
+                                        whileInView={{ opacity: 1, scale: 1 }}
+                                        transition={{ delay: idx * 0.08 }}
+                                        viewport={{ once: true }}
+                                        className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/50 border border-gray-200/80 backdrop-blur-sm"
+                                    >
+                                        <svg className="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        <span className="text-sm text-slate-600">{item}</span>
+                                    </motion.div>
+                                ))}
+                            </div>
+                        </motion.div>
+
+                        {/* Vision & Mission */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                className="p-8 rounded-2xl bg-white/50 border border-gray-200 backdrop-blur-md"
+                            >
+                                <h4 className="text-lg font-bold text-slate-800 mb-3 flex items-center gap-2">
+                                    <span className="w-8 h-8 rounded-full bg-cyan-100 flex items-center justify-center text-cyan-600 text-sm">◎</span>
+                                    Vision
+                                </h4>
+                                <p className="text-slate-600 leading-relaxed text-sm">
+                                    To develop sustainable, scalable infrastructure assets that integrate design intelligence, regulatory alignment, and disciplined capital deployment.
+                                </p>
+                            </motion.div>
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.1 }}
+                                viewport={{ once: true }}
+                                className="p-8 rounded-2xl bg-white/50 border border-gray-200 backdrop-blur-md"
+                            >
+                                <h4 className="text-lg font-bold text-slate-800 mb-3 flex items-center gap-2">
+                                    <span className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 text-sm">◈</span>
+                                    Mission
+                                </h4>
+                                <p className="text-slate-600 leading-relaxed text-sm">
+                                    To create value-driven built environments through structured planning, efficient execution, and long-term asset perspective.
+                                </p>
+                            </motion.div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* ===== 3. INFRASTRUCTURE CAPABILITIES ===== */}
                 <section id="capabilities" className="py-32 px-4 relative">
-
                     <div className="container mx-auto relative z-10">
                         <motion.div
                             initial={{ opacity: 0, y: 30 }}
@@ -315,14 +459,11 @@ function App() {
                         >
                             <span className="text-xs font-black tracking-[0.5em] uppercase text-gray-500">What We Do</span>
                             <h2 className="text-4xl md:text-5xl font-light mt-4 tracking-tight text-slate-800">
-                                Service Capabilities
+                                Integrated Development Capabilities
                             </h2>
-                            <p className="text-slate-500 mt-4 max-w-2xl mx-auto text-lg">
-                                Our comprehensive expertise spans the entire infrastructure development lifecycle.
-                            </p>
                         </motion.div>
 
-                        <div className="flex flex-col gap-5">
+                        <div className="flex flex-col gap-5 max-w-5xl mx-auto">
                             {capabilities.map((capability, idx) => {
                                 const isExpanded = expandedCapability === idx;
                                 return (
@@ -330,7 +471,7 @@ function App() {
                                         key={idx}
                                         initial={{ opacity: 0, y: 30 }}
                                         whileInView={{ opacity: 1, y: 0 }}
-                                        transition={{ duration: 0.6, delay: 0.1 }}
+                                        transition={{ duration: 0.6, delay: 0.05 }}
                                         viewport={{ once: true }}
                                     >
                                         <Card
@@ -341,23 +482,14 @@ function App() {
                                                 <div className="flex gap-4">
                                                     {/* Image */}
                                                     <div className="w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden">
-                                                        <img
-                                                            src={capability.image}
-                                                            alt={capability.title}
-                                                            className="w-full h-full object-cover"
-                                                        />
+                                                        <img src={capability.image} alt={capability.title} className="w-full h-full object-cover" />
                                                     </div>
-
                                                     {/* Content */}
                                                     <div className="flex-1 min-w-0">
                                                         <div className="flex items-start justify-between gap-2">
                                                             <div>
-                                                                <h3 className="text-sm font-semibold tracking-tight text-slate-800">
-                                                                    {capability.title}
-                                                                </h3>
-                                                                <p className="text-slate-500 leading-relaxed text-xs mt-1">
-                                                                    {capability.desc}
-                                                                </p>
+                                                                <h3 className="text-sm font-semibold tracking-tight text-slate-800">{capability.title}</h3>
+                                                                <p className="text-slate-500 leading-relaxed text-xs mt-1">{capability.desc}</p>
                                                             </div>
                                                             <motion.svg
                                                                 animate={{ rotate: isExpanded ? 180 : 0 }}
@@ -369,7 +501,6 @@ function App() {
                                                             </motion.svg>
                                                         </div>
 
-                                                        {/* Expandable Detail */}
                                                         <AnimatePresence>
                                                             {isExpanded && (
                                                                 <motion.div
@@ -379,19 +510,14 @@ function App() {
                                                                     transition={{ duration: 0.3, ease: 'easeInOut' }}
                                                                     className="overflow-hidden"
                                                                 >
-                                                                    <p className="text-slate-400 leading-relaxed text-[11px] mt-3 mb-3">
-                                                                        {capability.detail}
-                                                                    </p>
-                                                                    <div className="flex flex-wrap gap-1.5">
-                                                                        {capability.highlights.map((tag, i) => (
-                                                                            <span
-                                                                                key={i}
-                                                                                className="px-2 py-0.5 rounded-full bg-white/40 border border-stone-200/50 text-[10px] font-medium text-stone-500 tracking-wide"
-                                                                            >
-                                                                                {tag}
-                                                                            </span>
+                                                                    <ul className="mt-3 mb-2 space-y-1.5">
+                                                                        {capability.bullets.map((bullet, i) => (
+                                                                            <li key={i} className="flex items-start gap-2 text-slate-500 text-xs">
+                                                                                <span className="w-1.5 h-1.5 rounded-full bg-slate-400 mt-1.5 flex-shrink-0" />
+                                                                                {bullet}
+                                                                            </li>
                                                                         ))}
-                                                                    </div>
+                                                                    </ul>
                                                                 </motion.div>
                                                             )}
                                                         </AnimatePresence>
@@ -406,10 +532,8 @@ function App() {
                     </div>
                 </section>
 
-                {/* About Us Section */}
-                <section id="about" className="py-40 relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-b from-gray-200/10 via-transparent to-gray-300/10 pointer-events-none" />
-
+                {/* ===== 4. PROJECT EXPERIENCE ===== */}
+                <section id="experience" className="py-32 relative overflow-hidden">
                     <div className="container mx-auto px-4 relative z-10">
                         <motion.div
                             initial={{ opacity: 0, y: 30 }}
@@ -417,28 +541,42 @@ function App() {
                             viewport={{ once: true }}
                             className="text-center mb-16"
                         >
-                            <span className="text-xs font-black tracking-[0.5em] uppercase text-gray-500">Who We Are</span>
-                            <h2 className="text-4xl md:text-6xl font-light mt-4 tracking-tight text-slate-800">
-                                About Us
+                            <span className="text-xs font-black tracking-[0.5em] uppercase text-gray-500">Track Record</span>
+                            <h2 className="text-4xl md:text-5xl font-light mt-4 tracking-tight text-slate-800">
+                                Execution Track Record
                             </h2>
                         </motion.div>
 
-                        {/* Company Description */}
+                        {/* Hero Image Banner */}
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            className="max-w-4xl mx-auto mb-16"
+                            className="max-w-6xl mx-auto mb-16 rounded-2xl overflow-hidden shadow-lg"
                         >
-                            <div className="p-8 rounded-2xl bg-white/60 border border-gray-200 backdrop-blur-md shadow-sm">
-                                <p className="text-slate-600 text-lg leading-relaxed text-center">
-                                    <span className="text-slate-800 font-semibold">RAAM Infrastructure and Developers LLP</span> specializes in comprehensive real estate development with its promoters having a portfolio of <span className="text-slate-900 font-semibold">7.5+ million sq ft</span> residential projects across India since 2009. With proven expertise from master planning to large-scale project execution, we are strategically expanding into <span className="text-slate-900 font-semibold">airport infrastructure development</span>. Our residential success provides the perfect foundation for aviation opportunities.
-                                </p>
+                            <div className="relative h-64 md:h-80">
+                                <img src={projectExperienceImg} alt="Project Experience" className="w-full h-full object-cover" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                                <div className="absolute bottom-0 left-0 right-0 p-8">
+                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                        {[
+                                            { val: '7.5M+', lbl: 'Sq Ft Portfolio' },
+                                            { val: 'Multi', lbl: 'Phase Townships' },
+                                            { val: 'Large', lbl: 'Scale Clusters' },
+                                            { val: 'Urban', lbl: 'Corridors' },
+                                        ].map((stat, i) => (
+                                            <div key={i} className="text-center">
+                                                <div className="text-xl md:text-2xl font-bold text-white">{stat.val}</div>
+                                                <div className="text-[10px] text-white/70 uppercase tracking-wider">{stat.lbl}</div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
                             </div>
                         </motion.div>
 
                         {/* Stats Grid */}
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-16">
                             {metrics.map((metric, idx) => (
                                 <motion.div
                                     key={idx}
@@ -450,32 +588,75 @@ function App() {
                                 >
                                     <motion.div
                                         className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tighter mb-4 tabular-nums break-words"
-                                        style={{
-                                            color: metric.color,
-                                            textShadow: `0 0 40px ${metric.color}20`
-                                        }}
+                                        style={{ color: metric.color, textShadow: `0 0 40px ${metric.color}20` }}
                                         whileHover={{ scale: 1.05 }}
                                     >
-                                        <AnimatedCounter
-                                            target={metric.value}
-                                            suffix={metric.suffix}
-                                            duration={3}
-                                            delay={idx * 300}
-                                        />
+                                        <AnimatedCounter target={metric.value} suffix={metric.suffix} duration={3} delay={idx * 300} />
                                     </motion.div>
-                                    <div className="text-slate-700 font-semibold text-sm mb-1 uppercase tracking-wider">
-                                        {metric.label}
-                                    </div>
-                                    <div className="text-slate-400 text-xs uppercase tracking-widest">
-                                        {metric.sub}
-                                    </div>
+                                    <div className="text-slate-700 font-semibold text-sm mb-1 uppercase tracking-wider">{metric.label}</div>
+                                    <div className="text-slate-400 text-xs uppercase tracking-widest">{metric.sub}</div>
                                 </motion.div>
                             ))}
+                        </div>
+
+                        {/* Promoter Experience & Lifecycle */}
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                            {/* Promoter Experience */}
+                            <motion.div
+                                initial={{ opacity: 0, x: -20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                className="p-8 rounded-2xl bg-white/50 border border-gray-200 backdrop-blur-md"
+                            >
+                                <h3 className="text-lg font-semibold text-slate-800 mb-5">Promoter Experience (Since 2009)</h3>
+                                <ul className="space-y-3">
+                                    {[
+                                        'Land aggregation and master planning',
+                                        'High-rise and mid-rise residential developments',
+                                        'Infrastructure-linked housing ecosystems',
+                                        'Phased construction and delivery models',
+                                        'Monetization-driven planning strategy',
+                                    ].map((item, i) => (
+                                        <li key={i} className="flex items-start gap-3 text-slate-600 text-sm">
+                                            <span className="w-2 h-2 rounded-full bg-cyan-500 mt-1.5 flex-shrink-0" />
+                                            {item}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </motion.div>
+
+                            {/* Structured Development Lifecycle */}
+                            <motion.div
+                                initial={{ opacity: 0, x: 20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                className="p-8 rounded-2xl bg-white/50 border border-gray-200 backdrop-blur-md"
+                            >
+                                <h3 className="text-lg font-semibold text-slate-800 mb-5">Structured Development Lifecycle</h3>
+                                <div className="space-y-4">
+                                    {lifecycleSteps.map((step, i) => (
+                                        <motion.div
+                                            key={i}
+                                            initial={{ opacity: 0, x: 10 }}
+                                            whileInView={{ opacity: 1, x: 0 }}
+                                            transition={{ delay: i * 0.1 }}
+                                            viewport={{ once: true }}
+                                            className="flex items-center gap-4"
+                                        >
+                                            <span className="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
+                                                {step.step}
+                                            </span>
+                                            <span className="text-slate-700 text-sm font-medium">{step.title}</span>
+                                        </motion.div>
+                                    ))}
+                                </div>
+                                <p className="text-slate-500 text-xs mt-5 italic">This lifecycle ensures clarity, risk management, and capital efficiency.</p>
+                            </motion.div>
                         </div>
                     </div>
                 </section>
 
-                {/* News & Social Media Section */}
+                {/* ===== 5. NEWS & MEDIA ===== */}
                 <section id="news" className="py-32 px-4 relative">
                     <div className="container mx-auto relative z-10">
                         <motion.div
@@ -486,60 +667,50 @@ function App() {
                         >
                             <span className="text-xs font-black tracking-[0.5em] uppercase text-gray-500">Stay Connected</span>
                             <h2 className="text-4xl md:text-5xl font-light mt-4 tracking-tight text-slate-800">
-                                News & Social
+                                News, Updates & Industry Engagement
                             </h2>
-                            <p className="text-slate-500 mt-4 max-w-2xl mx-auto text-lg">
-                                Follow our journey and stay updated with the latest developments.
-                            </p>
                         </motion.div>
 
-                        {/* Latest News */}
-                        <div className="mb-16">
-                            <h3 className="text-lg font-semibold text-slate-700 mb-6 tracking-wide uppercase">Latest Updates</h3>
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                {[
-                                    {
-                                        date: 'Feb 2026',
-                                        title: 'RAAM Infrastructure Expands into Airport Development',
-                                        excerpt: 'Leveraging 15+ years of residential construction expertise, RAAM Infrastructure announces strategic entry into aviation infrastructure, targeting emerging airport projects across India.',
-                                        category: 'Company News'
-                                    },
-                                    {
-                                        date: 'Jan 2026',
-                                        title: 'Milestone: 7.5 Million Sq Ft Residential Portfolio',
-                                        excerpt: 'RAAM Infrastructure celebrates the completion of its residential development milestone, having successfully delivered over 7.5 million sq ft of quality housing since 2009.',
-                                        category: 'Milestone'
-                                    },
-                                    {
-                                        date: 'Dec 2025',
-                                        title: '3D Visualization Studio Achieves 100% Approval Rate',
-                                        excerpt: 'Our in-house 3D isometric rendering studio has maintained a perfect regulatory approval track record, streamlining project timelines significantly.',
-                                        category: 'Innovation'
-                                    }
-                                ].map((news, idx) => (
-                                    <motion.div
-                                        key={idx}
-                                        initial={{ opacity: 0, y: 30 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
-                                        transition={{ duration: 0.6, delay: idx * 0.1 }}
-                                        viewport={{ once: true }}
-                                    >
-                                        <Card className="bg-white/30 border-white/40 backdrop-blur-sm overflow-hidden hover:bg-white/45 transition-all duration-400 shadow-sm hover:shadow-md h-full">
-                                            <CardContent className="p-5 flex flex-col h-full">
-                                                <div className="flex items-center justify-between mb-3">
-                                                    <span className="text-[10px] font-bold uppercase tracking-wider text-stone-400">{news.date}</span>
-                                                    <span className="px-2 py-0.5 rounded-full bg-white/40 border border-stone-200/50 text-[10px] font-medium text-stone-500">{news.category}</span>
-                                                </div>
-                                                <h4 className="text-sm font-semibold text-slate-800 mb-2 leading-snug">{news.title}</h4>
-                                                <p className="text-slate-500 text-xs leading-relaxed flex-1">{news.excerpt}</p>
-                                                <div className="mt-4 pt-3 border-t border-stone-200/30">
-                                                    <span className="text-xs font-medium text-stone-500 hover:text-stone-700 cursor-pointer transition-colors">Read More →</span>
-                                                </div>
-                                            </CardContent>
-                                        </Card>
-                                    </motion.div>
-                                ))}
-                            </div>
+                        {/* Corporate Updates with image */}
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-6xl mx-auto mb-16">
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                            >
+                                <h3 className="text-lg font-semibold text-slate-800 mb-4">Corporate Updates</h3>
+                                <p className="text-slate-600 leading-relaxed mb-6">
+                                    RAAM Infrastructure Developers LLP regularly engages with industry stakeholders, regulatory authorities, consultants, and strategic partners to enhance development capabilities and align with emerging infrastructure opportunities.
+                                </p>
+                                <p className="text-slate-500 leading-relaxed mb-6">
+                                    Updates regarding corporate developments, project milestones, partnerships, and regulatory approvals will be shared in this section.
+                                </p>
+
+                                <h3 className="text-lg font-semibold text-slate-800 mb-4 mt-8">Industry Participation</h3>
+                                <ul className="space-y-2">
+                                    {[
+                                        'Infrastructure and urban development forums',
+                                        'Industry consultations and policy discussions',
+                                        'Regulatory engagement sessions',
+                                        'Professional development and sector conferences',
+                                    ].map((item, i) => (
+                                        <li key={i} className="flex items-start gap-3 text-slate-600 text-sm">
+                                            <span className="w-2 h-2 rounded-full bg-purple-500 mt-1.5 flex-shrink-0" />
+                                            {item}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </motion.div>
+
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.1 }}
+                                viewport={{ once: true }}
+                                className="rounded-2xl overflow-hidden shadow-lg"
+                            >
+                                <img src={industryForumImg} alt="Industry Forum" className="w-full h-full object-cover min-h-[300px]" />
+                            </motion.div>
                         </div>
 
                         {/* Social Media */}
@@ -547,54 +718,30 @@ function App() {
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
+                            className="max-w-6xl mx-auto"
                         >
-                            <h3 className="text-lg font-semibold text-slate-700 mb-6 tracking-wide uppercase">Follow Us</h3>
+                            <h3 className="text-lg font-semibold text-slate-700 mb-3 text-center">Social Media & Communication</h3>
+                            <p className="text-slate-500 text-center mb-8 max-w-2xl mx-auto text-sm">
+                                Stay connected with RAAM Infrastructure Developers LLP through our official communication channels for updates on development insights, industry perspectives, and corporate milestones.
+                            </p>
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                                 {[
                                     {
-                                        name: 'LinkedIn',
-                                        handle: '@raam-infrastructure',
-                                        followers: '12.5K',
-                                        color: '#0A66C2',
-                                        icon: (
-                                            <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-                                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                                            </svg>
-                                        )
+                                        name: 'LinkedIn', handle: '@raam-infrastructure', color: '#0A66C2',
+                                        icon: <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" /></svg>
                                     },
                                     {
-                                        name: 'Instagram',
-                                        handle: '@raam.infra',
-                                        followers: '8.2K',
-                                        color: '#E4405F',
-                                        icon: (
-                                            <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-                                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
-                                            </svg>
-                                        )
+                                        name: 'Instagram', handle: '@raam.infra', color: '#E4405F',
+                                        icon: <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" /></svg>
                                     },
                                     {
-                                        name: 'X (Twitter)',
-                                        handle: '@raam_infra',
-                                        followers: '5.1K',
-                                        color: '#000000',
-                                        icon: (
-                                            <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-                                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                                            </svg>
-                                        )
+                                        name: 'X (Twitter)', handle: '@raam_infra', color: '#000000',
+                                        icon: <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
                                     },
                                     {
-                                        name: 'YouTube',
-                                        handle: '@RAAMInfra',
-                                        followers: '3.8K',
-                                        color: '#FF0000',
-                                        icon: (
-                                            <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-                                                <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-                                            </svg>
-                                        )
-                                    }
+                                        name: 'YouTube', handle: '@RAAMInfra', color: '#FF0000',
+                                        icon: <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" /></svg>
+                                    },
                                 ].map((social, idx) => (
                                     <motion.div
                                         key={idx}
@@ -609,8 +756,7 @@ function App() {
                                                     {social.icon}
                                                 </div>
                                                 <h4 className="text-sm font-semibold text-slate-800 mb-0.5">{social.name}</h4>
-                                                <p className="text-[11px] text-slate-400 mb-2">{social.handle}</p>
-                                                <p className="text-lg font-bold text-slate-700 mb-3">{social.followers} <span className="text-[10px] font-normal text-slate-400 uppercase">followers</span></p>
+                                                <p className="text-[11px] text-slate-400 mb-3">{social.handle}</p>
                                                 <span className="inline-block px-3 py-1 rounded-full text-[11px] font-medium border transition-colors"
                                                     style={{ borderColor: social.color + '40', color: social.color }}
                                                 >
@@ -625,38 +771,47 @@ function App() {
                     </div>
                 </section>
 
-                {/* CTA Section */}
-                <section className="py-40 relative">
-                    <div className="container mx-auto px-4 text-center">
+                {/* ===== 6. CONTACT CTA ===== */}
+                <section id="contact-cta" className="py-32 relative">
+                    <div className="container mx-auto px-4">
                         <motion.div
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            className="max-w-3xl mx-auto"
+                            className="max-w-4xl mx-auto text-center"
                         >
-                            <h2 className="text-4xl md:text-6xl font-black mb-6 tracking-tight text-slate-800">
-                                Ready to Build the{' '}
+                            <h2 className="text-4xl md:text-5xl font-light mb-6 tracking-tight text-slate-800">
+                                Partner With{' '}
                                 <GradientText colors={["#00f3ff", "#a855f7", "#f59e0b", "#00f3ff"]}>
-                                    Future?
+                                    RAAM Infrastructure
                                 </GradientText>
                             </h2>
-                            <p className="text-slate-500 text-lg mb-10">
-                                Partner with us to create infrastructure that transforms communities and defines the next era of development.
+                            <p className="text-slate-500 text-lg mb-10 max-w-2xl mx-auto">
+                                For development partnerships, infrastructure collaboration, or strategic engagement opportunities, connect with RAAM Infrastructure Developers LLP.
                             </p>
-                            <div className="flex flex-wrap justify-center gap-4">
-                                <Button
-                                    size="lg"
-                                    className="rounded-full bg-stone-600 text-white hover:bg-stone-700 px-10 py-7 text-lg font-bold shadow-lg"
-                                >
-                                    Start a Conversation
-                                </Button>
+
+                            {/* Engagement list */}
+                            <div className="flex flex-wrap justify-center gap-3 mb-10">
+                                {['Landowners', 'Strategic Investors', 'Infrastructure Partners', 'Consultants & Advisors', 'Institutional Stakeholders'].map((item, i) => (
+                                    <span key={i} className="px-4 py-2 rounded-full bg-white/50 border border-gray-200 text-sm text-slate-600 font-medium">
+                                        {item}
+                                    </span>
+                                ))}
                             </div>
+
+                            <Button
+                                size="lg"
+                                className="rounded-full bg-stone-600 text-white hover:bg-stone-700 px-10 py-7 text-lg font-bold shadow-lg"
+                                onClick={() => window.location.href = 'mailto:admin@raaminfradev.com'}
+                            >
+                                Get In Touch
+                            </Button>
                         </motion.div>
                     </div>
                 </section>
             </main>
 
-            {/* Footer */}
+            {/* ===== FOOTER ===== */}
             <footer id="contact" className="py-16 px-8 border-t border-gray-300 relative z-10 bg-gray-100/80 backdrop-blur-xl">
                 <div className="container mx-auto">
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
@@ -666,30 +821,39 @@ function App() {
                                     RAAM Infrastructure
                                 </GradientText>
                             </span>
-                            <p className="text-slate-500 mt-4 max-w-md leading-relaxed">
-                                RAAM Infrastructure and Developers LLP specializes in comprehensive real estate development and airport infrastructure.
+                            <p className="text-slate-500 mt-4 max-w-md leading-relaxed text-sm">
+                                RAAM Infrastructure Developers LLP is a multidisciplinary development platform focused on master planning, structured real estate development, and infrastructure-led growth.
                             </p>
                         </div>
                         <div>
                             <h4 className="font-bold text-slate-800 mb-4 uppercase tracking-wider text-sm">Quick Links</h4>
-                            <ul className="space-y-2 text-slate-500">
+                            <ul className="space-y-2 text-slate-500 text-sm">
                                 <li><a href="#" className="hover:text-slate-800 transition-colors">Home</a></li>
+                                <li><a href="#about" className="hover:text-slate-800 transition-colors">About RAAM</a></li>
                                 <li><a href="#capabilities" className="hover:text-slate-800 transition-colors">Capabilities</a></li>
-                                <li><a href="#about" className="hover:text-slate-800 transition-colors">About Us</a></li>
+                                <li><a href="#experience" className="hover:text-slate-800 transition-colors">Experience</a></li>
+                                <li><a href="#news" className="hover:text-slate-800 transition-colors">News & Media</a></li>
                             </ul>
                         </div>
                         <div>
-                            <h4 className="font-bold text-slate-800 mb-4 uppercase tracking-wider text-sm">Contact Us</h4>
-                            <ul className="space-y-2 text-slate-500">
+                            <h4 className="font-bold text-slate-800 mb-4 uppercase tracking-wider text-sm">Contact</h4>
+                            <ul className="space-y-3 text-slate-500 text-sm">
                                 <li>
-                                    <a href="mailto:contact@raaminfra.com" className="hover:text-slate-800 transition-colors">
-                                        contact@raaminfra.com
+                                    <span className="text-slate-700 font-medium block mb-1">Email</span>
+                                    <a href="mailto:admin@raaminfradev.com" className="hover:text-slate-800 transition-colors">
+                                        admin@raaminfradev.com
                                     </a>
                                 </li>
+                                <li>
+                                    <span className="text-slate-700 font-medium block mb-1">Registered Office</span>
+                                    <address className="not-italic text-slate-500 leading-relaxed text-xs">
+                                        Koduru Satya, Srinivas and Anupama<br />
+                                        22-7-201, NH-16 Service Road<br />
+                                        Kunchanapalli, Revenue Ward No-22<br />
+                                        Mangala Giri Tadepalli-522501
+                                    </address>
+                                </li>
                             </ul>
-                            <p className="text-slate-400 mt-4 text-sm">
-                                For any queries, drop us an email.
-                            </p>
                         </div>
                     </div>
                     <Separator className="bg-gray-300 mb-8" />
@@ -702,112 +866,7 @@ function App() {
                     </div>
                 </div>
             </footer>
-
-
-            {/* Global Portfolio Modal */}
-            <AnimatePresence>
-                {showPortfolio && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-gray-900/60 backdrop-blur-xl"
-                        onClick={() => setShowPortfolio(false)}
-                    >
-                        <motion.div
-                            initial={{ scale: 0.8, opacity: 0, y: 50 }}
-                            animate={{ scale: 1, opacity: 1, y: 0 }}
-                            exit={{ scale: 0.8, opacity: 0, y: 50 }}
-                            transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                            className="relative max-w-5xl w-full max-h-[90vh] overflow-y-auto rounded-2xl bg-gradient-to-br from-white via-gray-50 to-gray-100 border border-gray-300 shadow-2xl"
-                            onClick={e => e.stopPropagation()}
-                        >
-                            {/* Close Button */}
-                            <button
-                                onClick={() => setShowPortfolio(false)}
-                                className="absolute top-4 right-4 p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors z-10 text-slate-700"
-                            >
-                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                                </svg>
-                            </button>
-
-                            {/* Header */}
-                            <div className="p-8 pb-0">
-                                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-200 border border-gray-300 text-slate-600 text-xs font-bold tracking-widest uppercase mb-4">
-                                    <span className="w-2 h-2 rounded-full bg-slate-500 animate-pulse" />
-                                    Global Presence
-                                </div>
-                                <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                                    <GradientText colors={["#a855f7", "#f59e0b", "#00f3ff", "#a855f7"]}>
-                                        Global Portfolio
-                                    </GradientText>
-                                </h2>
-                                <p className="text-slate-500 text-lg">
-                                    Explore our landmark infrastructure projects spanning 4 continents.
-                                </p>
-                            </div>
-
-                            {/* Stats Row */}
-                            <div className="px-8 py-6">
-                                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                    {[
-                                        { value: "47", label: "Active Projects" },
-                                        { value: "$12B", label: "Total Investment" },
-                                        { value: "15", label: "Countries" },
-                                        { value: "2M+", label: "Lives Impacted" }
-                                    ].map((stat, i) => (
-                                        <motion.div
-                                            key={i}
-                                            initial={{ opacity: 0, scale: 0.8 }}
-                                            animate={{ opacity: 1, scale: 1 }}
-                                            transition={{ delay: 0.3 + i * 0.1 }}
-                                            className="text-center p-4 rounded-xl bg-gray-100 border border-gray-200"
-                                        >
-                                            <div className="text-2xl md:text-3xl font-black text-slate-800">{stat.value}</div>
-                                            <div className="text-xs text-slate-500 uppercase tracking-wider">{stat.label}</div>
-                                        </motion.div>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Project Highlights */}
-                            <div className="p-8 pt-0">
-                                <h3 className="text-lg font-bold text-slate-800 mb-4">Featured Projects</h3>
-                                <div className="space-y-4">
-                                    {[
-                                        { name: "Northern Aero-Hub Terminal", location: "Singapore", status: "Operational", value: "$2.8B" },
-                                        { name: "Atlantic Gateway Port", location: "Rotterdam, Netherlands", status: "Construction", value: "$1.5B" },
-                                        { name: "Sahara Solar District", location: "Morocco", status: "Planning", value: "$890M" }
-                                    ].map((project, i) => (
-                                        <motion.div
-                                            key={i}
-                                            initial={{ opacity: 0, x: -20 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            transition={{ delay: 0.4 + i * 0.1 }}
-                                            className="flex items-center justify-between p-4 rounded-xl bg-gray-100 border border-gray-200 hover:border-gray-400 transition-all"
-                                        >
-                                            <div>
-                                                <h4 className="font-bold text-slate-800">{project.name}</h4>
-                                                <p className="text-slate-500 text-sm">{project.location}</p>
-                                            </div>
-                                            <div className="text-right">
-                                                <div className="text-slate-700 font-bold">{project.value}</div>
-                                                <div className={`text-xs px-2 py-1 rounded-full ${project.status === 'Operational' ? 'bg-green-500/20 text-green-400' :
-                                                    project.status === 'Construction' ? 'bg-amber-500/20 text-amber-400' :
-                                                        'bg-blue-500/20 text-blue-400'
-                                                    }`}>{project.status}</div>
-                                            </div>
-                                        </motion.div>
-                                    ))}
-                                </div>
-                            </div>
-
-                        </motion.div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </div >
+        </div>
     )
 }
 
