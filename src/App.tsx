@@ -129,7 +129,7 @@ function App() {
     ];
 
     return (
-        <div ref={containerRef} className="relative min-h-screen text-slate-800 font-sans selection:bg-cyan-500/30 overflow-x-hidden bg-gradient-to-br from-stone-100 to-gray-200">
+        <div ref={containerRef} className="relative min-h-screen text-slate-800 font-sans selection:bg-cyan-500/30 overflow-x-hidden bg-stone-50">
             {/* Layered Background */}
             <div className="fixed inset-0 z-0">
                 <ColorBends
@@ -239,7 +239,7 @@ function App() {
                         </motion.div>
 
                         {/* Headline */}
-                        <motion.h1 className="text-3xl md:text-6xl lg:text-[70px] font-thin tracking-tight mb-6 leading-[1.2]">
+                        <motion.h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight mb-6 leading-[1.2]">
                             <span className="block text-slate-800">Building Integrated</span>
                             <span className="block">
                                 <span className="italic font-light text-slate-900">Infrastructure</span>
@@ -582,7 +582,7 @@ function App() {
                                 >
                                     <motion.div
                                         className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tighter mb-4 tabular-nums break-words"
-                                        style={{ color: metric.color, textShadow: `0 0 40px ${metric.color}20` }}
+                                        style={{ color: metric.color }}
                                         whileHover={{ scale: 1.05 }}
                                     >
                                         <AnimatedCounter target={metric.value} suffix={metric.suffix} duration={3} delay={idx * 300} />
@@ -637,7 +637,7 @@ function App() {
                                             viewport={{ once: true }}
                                             className="flex items-center gap-4"
                                         >
-                                            <span className="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
+                                            <span className="w-10 h-10 rounded-full bg-gradient-to-r from-stone-600 to-stone-800 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
                                                 {step.step}
                                             </span>
                                             <span className="text-slate-700 text-sm font-medium">{step.title}</span>
